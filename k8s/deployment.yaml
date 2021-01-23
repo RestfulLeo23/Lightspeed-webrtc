@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lightspeed-webrtc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lightspeed-webrtc
+  template:
+    metadata:
+      labels:
+        app: lightspeed-webrtc
+    spec:
+      containers:
+        - name: lightspeed-webrtc
+          image: restfulleo/lightspeed-webrtc:latest
+          ports:
+            - containerPort: 8080
+              name: rtc-port
+            - containerPort: 65535
+              name: negotiated-port
+              protocol: UDP
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 100m
+            requests:
+              memory: 256Mi
+              cpu: 100m
+      imagePullSecrets:
+        - name: regcred

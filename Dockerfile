@@ -11,6 +11,8 @@ FROM debian:buster-slim
 COPY --from=builder /go/src/app/lightspeed-webrtc /usr/local/bin/
 EXPOSE 8080
 
+ENV ADDRESS $ADDRESS
+
 #CMD ["lightspeed-webrtc --addr=XXX.XXX.XXX.XXX", "run"]
 # defaults to localhost:8080, then up to docker compose to bind ports
-CMD ["lightspeed-webrtc", "--addr=localhost"]
+CMD lightspeed-webrtc

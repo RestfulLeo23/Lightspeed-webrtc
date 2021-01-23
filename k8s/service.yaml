@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lightspeed-webrtc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: rtc-port
+    - port: 65535
+      targetPort: 65535
+      protocol: UDP
+      name: negotiated-port
+  selector:
+    app: lightspeed-webrtc
