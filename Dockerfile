@@ -10,9 +10,10 @@ RUN go build -o lightspeed-webrtc .
 FROM debian:buster-slim
 COPY --from=builder /go/src/app/lightspeed-webrtc /usr/local/bin/
 EXPOSE 8080
+EXPOSE 65535
 
 ENV ADDRESS $ADDRESS
 
 #CMD ["lightspeed-webrtc --addr=XXX.XXX.XXX.XXX", "run"]
 # defaults to localhost:8080, then up to docker compose to bind ports
-CMD lightspeed-webrtc
+CMD lightspeed-webrtc --addr=$ADDRESS
